@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp
+  labels:
+    app: flaskapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: flaskapp
+  template:
+    metadata:
+      labels:
+        app: flaskapp
+    spec:
+      containers:
+        - name: flaskapp
+          image: 2255mukund/simple-flask-app:1.1.0
+          ports:
+            - containerPort: 5000
+          env:
+            - name: DB_URL
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo_url
+            - name: DB_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: environment
+            - name: URL_SCHEME
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: preffered_url_scheme
+          imagePullPolicy: Always
