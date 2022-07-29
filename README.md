@@ -6,3 +6,4 @@
 * Docker installed in local setup
 ### Just do ```bash run.sh``` after installing all prerequisites and it will generate the URL to interact with the server
 ### Enjoy this project :)
+
