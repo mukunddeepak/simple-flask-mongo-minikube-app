@@ -1,5 +1,6 @@
 minikube start
 kubectl apply -f ./mongo_config.yaml
+kubeseal < ./mongo-secret.yaml > ./mongo-sealedsecret.yaml
 kubectl apply -f ./mongo-sealedsecret.yaml
 kubectl apply -f ./flaskapp_deployment.yaml
 kubectl apply -f ./loadbalancer.yaml
